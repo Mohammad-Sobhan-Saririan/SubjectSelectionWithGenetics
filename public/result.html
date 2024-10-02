@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتایج قرعه‌کشی</title>]
+    <style>
+        /* Import the Vazir font from Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap');
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            direction: rtl;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2980b9;
+            font-weight: 700;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #ecf0f1;
+        }
+
+        th,
+        td {
+            border: 1px solid #dcdde1;
+            padding: 12px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #2980b9;
+            color: white;
+            font-weight: 600;
+        }
+
+        td {
+            background-color: #fff;
+            color: #34495e;
+        }
+
+        .back-button {
+            padding: 12px 20px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background-color: #2ecc71;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>نتایج قرعه‌کشی</h1>
+
+        <table id="resultTable">
+            <thead>
+                <tr>
+                    <th>نام گروه</th>
+                    <th>موضوع</th>
+                    <th>تاریخ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- In this section, the results of the lottery will be displayed -->
+            </tbody>
+        </table>
+
+        <!--  button for back to home page and delete this page from history -->
+        <button class="back-button">بازگشت به صفحه اصلی</button>
+        <!-- clear  history -->
+    </div>
+
+    <script>
+        const apiBaseUrl = 'http://localhost:3000';
+        const backButton = document.querySelector('.back-button');
+        backButton.addEventListener('click', () => {
+            window.location.replace('http://localhost:3000/client.html');
+        });
+        document.addEventListener('DOMContentLoaded', async () => {
+            //Send a request to the server to get the lottery results
+            try {
+                const response = await fetch(`${apiBaseUrl}/get-lottery-results`);
+                const results = await response.json();
+
+                const resultTableBody = document.querySelector('#resultTable tbody');
+
+                //  Add each group to the table
+                results.forEach(group => {
+                    const row = document.createElement('tr');
+
+                    // Name of the group
+                    const groupNameCell = document.createElement('td');
+                    groupNameCell.textContent = group.group.split('--')[0];
+                    row.appendChild(groupNameCell);
+
+                    // Topic of the group
+                    const topicCell = document.createElement('td');
+                    topicCell.textContent = group.subject;
+                    row.appendChild(topicCell);
+
+                    // Date of the lottery
+                    const dateCell = document.createElement('td');
+                    dateCell.textContent = group.date;
+                    row.appendChild(dateCell);
+
+                    resultTableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching lottery results:', error);
+            }
+        });
+    </script>
+</body>
+
+</html>

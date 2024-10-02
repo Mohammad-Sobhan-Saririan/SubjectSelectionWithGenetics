@@ -1,0 +1,170 @@
+[
+  {
+    "id": 1,
+    "name": "روش نوشتن پروپوزال 1",
+    "date": "1403-08-01",
+    "capacity": 1,
+    "isForDouble": false
+  },
+  {
+    "id": 2,
+    "name": "ابزار های هوش مصنوعی تولید کننده-ChatGpt 2",
+    "date": "1403-08-08",
+    "capacity": 1,
+    "isForDouble": true
+  },
+  {
+    "id": 3,
+    "name": "ابزار های هوش مصنوعی تولید کننده-Gemini 3",
+    "date": "1403-08-08",
+    "capacity": 1,
+    "isForDouble": true
+  },
+  {
+    "id": 4,
+    "name": "ابزار های هوش مصنوعی تولید کننده-ClaudeAI 4",
+    "date": "1403-08-08",
+    "capacity": 1,
+    "isForDouble": true
+  },
+  {
+    "id": 5,
+    "name": "ابزار های هوش مصنوعی تولید کننده-LLama 5",
+    "date": "1403-08-08",
+    "capacity": 1,
+    "isForDouble": true
+  },
+  {
+    "id": 6,
+    "name": "ابزار های هوش مصنوعی تولید کننده-DALLE 6",
+    "date": "1403-08-08",
+    "capacity": 1,
+    "isForDouble": true
+  },
+  {
+    "id": 7,
+    "name": "انواع ارائه و ملزومات آن 7",
+    "date": "1403-08-08",
+    "capacity": 1,
+    "isForDouble": true
+  },
+  {
+    "id": 8,
+    "name": "نکات قابل توجه قبل از ارائه 8",
+    "date": "1403-08-15",
+    "capacity": 1,
+    "isForDouble": false
+  },
+  {
+    "id": 9,
+    "name": "نکات قابل توجه در حین ارائه 9",
+    "date": "1403-08-15",
+    "capacity": 1,
+    "isForDouble": false
+  },
+  {
+    "id": 10,
+    "name": "روش ساخت اسلاید مناسب 10",
+    "date": "1403-08-22",
+    "capacity": 1,
+    "isForDouble": false
+  },
+  {
+    "id": 11,
+    "name": "روش ساختار دادن به مطالب 11",
+    "date": "1403-08-22",
+    "capacity": 1,
+    "isForDouble": false
+  },
+  {
+    "id": 12,
+    "name": "روش نوشتن گزارش پیشرفت 12",
+    "date": "1403-08-29",
+    "capacity": 1,
+    "isForDouble": false
+  },
+  {
+    "id": 13,
+    "name": "تقلب علمی و مصداق های آن 13",
+    "date": "1403-08-29",
+    "capacity": 1,
+    "isForDouble": false
+  },
+  {
+    "id": 14,
+    "name": "ابزار های تقلب/مشابهت یاب-Turnitin 14",
+    "date": "1403-09-06",
+    "capacity": 1,
+    "isForDouble": true
+  },
+  {
+    "id": 15,
+    "name": "ابزار های تقلب/مشابهت یاب-Unicheck 15",
+    "date": "1403-09-06",
+    "capacity": 1,
+    "isForDouble": true
+  },
+  {
+    "id": 16,
+    "name": "ابزار های تقلب/مشابهت یاب-Proctoru 16",
+    "date": "1403-09-06",
+    "capacity": 1,
+    "isForDouble": true
+  },
+  {
+    "id": 17,
+    "name": "ابزار های تقلب/مشابهت یاب-Plagscan 17",
+    "date": "1403-09-06",
+    "capacity": 1,
+    "isForDouble": true
+  },
+  {
+    "id": 18,
+    "name": "ابزار های تقلب/مشابهت یاب-MOSS 18",
+    "date": "1403-09-06",
+    "capacity": 1,
+    "isForDouble": true
+  },
+  {
+    "id": 19,
+    "name": "روش های ارجاع دهی 19",
+    "date": "1403-09-06",
+    "capacity": 1,
+    "isForDouble": false
+  },
+  {
+    "id": 20,
+    "name": "روش ساخت پوستر 20",
+    "date": "1403-09-13",
+    "capacity": 1,
+    "isForDouble": false
+  },
+  {
+    "id": 21,
+    "name": "ابزار های ارائه موثر-Canva 21",
+    "date": "1403-09-20",
+    "capacity": 1,
+    "isForDouble": true
+  },
+  {
+    "id": 22,
+    "name": "ابزار های ارائه موثر-Prezi 22",
+    "date": "1403-09-20",
+    "capacity": 1,
+    "isForDouble": true
+  },
+  {
+    "id": 23,
+    "name": "ابزار های ارجاع دهی-Zetoro 23",
+    "date": "1403-09-20",
+    "capacity": 1,
+    "isForDouble": true
+  },
+  {
+    "id": 24,
+    "name": "ابزار های ارجاع دهی-Mendeley 24",
+    "date": "1403-09-20",
+    "capacity": 1,
+    "isForDouble": true
+  }
+]

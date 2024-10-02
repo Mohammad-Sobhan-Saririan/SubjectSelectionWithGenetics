@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت گروه با اولویت‌بندی موضوعات و تاریخ‌ها</title>
+    <style>
+        /* change the font-family to Vazir for the whole page */
+
+        /* Import the Vazir font from Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap');
+        /* change the font-family to Vazir for the whole page */
+
+        /*  option font familly to vaizmatn */
+        option {
+            font-family: 'Vazirmatn', sans-serif;
+            /* ltr */
+            direction: rtl;
+            text-align: right;
+        }
+
+        body {
+            font-family: 'Vazirmatn';
+            direction: rtl;
+            background-color: #f0f4f7;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .left-section {
+            width: 68%;
+        }
+
+        .right-section {
+            width: 30%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-weight: 500;
+            color: #34495e;
+        }
+
+        input[type="text"] {
+            width: 97%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #dcdde1;
+            border-radius: 8px;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        .selections {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .list-container {
+            width: 48%;
+        }
+
+        .list-container h3 {
+            color: #2980b9;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .list-container select {
+            width: 100%;
+            height: 250px;
+            padding: 10px;
+            border: 1px solid #dcdde1;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: #f8f9fa;
+            transition: border-color 0.3s;
+            overflow-y: auto;
+        }
+
+        .list-container select:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        /* Style for options */
+        .list-container select option {
+            padding: 10px;
+            margin: 5px;
+            background-color: #fff;
+            color: #333;
+            font-weight: 500;
+            border-bottom: 1px solid #e0e0e0;
+            overflow: visible;
+        }
+
+        .list-container select option:hover {
+            background-color: #eaf2f8;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background-color: #ecf0f1;
+        }
+
+        th,
+        td {
+            border: 1px solid #dcdde1;
+            padding: 10px;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        th {
+            background-color: #2980b9;
+            color: white;
+            font-weight: 600;
+        }
+
+        button {
+            font-family: 'Vazirmatn';
+            padding: 12px 20px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2ecc71;
+        }
+
+        .remove-button {
+            background-color: #e74c3c;
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+
+        .remove-button:hover {
+            background-color: #c0392b;
+        }
+
+        .results-button {
+            background-color: #2980b9;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .results-button:hover {
+            background-color: #3498db;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* Style for right section (group list) */
+        .group-list-container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .group-list-container h3 {
+            color: #2980b9;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .group-list-container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .group-list-container th,
+        .group-list-container td {
+            padding: 10px;
+            border: 1px solid #dcdde1;
+            text-align: center;
+        }
+
+        .group-list-container th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .delete-button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background-color: #c0392b;
+        }
+
+        /* Add smooth transition for hover effects */
+        button,
+        .remove-button,
+        .delete-button {
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover,
+        .remove-button:hover,
+        .delete-button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left-section">
+            <h1>ثبت گروه جدید با اولویت‌بندی</h1>
+            <form id="groupForm">
+                <label for="groupName">نام گروه:</label>
+                <input type="text" id="groupName" name="groupName" required>
+
+                <div class="selections">
+                    <div class="list-container" style="width: 80%;">
+                        <h3>انتخاب موضوعات:</h3>
+                        <select id="subjectSelect" multiple></select>
+                        <table id="subjectTable">
+                            <thead>
+                                <tr>
+                                    <th>اولویت</th>
+                                    <th>موضوع</th>
+                                    <th>حذف</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <div class="list-container">
+                        <h3>انتخاب تاریخ‌های مشکل‌دار:</h3>
+                        <select id="dateSelect" multiple></select>
+                        <table id="dateTable">
+                            <thead>
+                                <tr>
+                                    <th>تاریخ</th>
+                                    <th>حذف</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div class="error" id="dateError"></div>
+                    </div>
+                </div>
+
+                <button type="submit">ثبت گروه</button>
+            </form>
+            <!-- Button for view results -->
+            <button class="results-button" id="viewResultsButton">مشاهده نتایج قرعه‌کشی</button>
+        </div>
+
+        <div class="right-section">
+            <div class="group-list-container">
+                <h3>گروه‌های ثبت شده</h3>
+                <table id="groupTable">
+                    <thead>
+                        <tr>
+                            <th>نام گروه</th>
+                            <th>حذف</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const apiBaseUrl = 'http://localhost:3000';
+        const maxProblemDates = 20;  // Maximum number of problem dates that can be selected
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const subjectSelect = document.getElementById('subjectSelect');
+            const dateSelect = document.getElementById('dateSelect');
+            const subjectTableBody = document.querySelector('#subjectTable tbody');
+            const dateTableBody = document.querySelector('#dateTable tbody');
+            const dateError = document.getElementById('dateError');
+            const viewResultsButton = document.getElementById('viewResultsButton');
+            const groupTableBody = document.querySelector('#groupTable tbody');
+
+            let groups = await fetch(`${apiBaseUrl}/groups`).then(response => response.json());
+
+            // Fetch subjects from the server
+            const subjectResponse = await fetch(`${apiBaseUrl}/subjects`);
+            const subjects = await subjectResponse.json();
+
+            // Add groups to the group list
+            groups.forEach(group => {
+                console.log("Group: ", group);
+                const row = document.createElement('tr');
+
+                const groupNameCell = document.createElement('td');
+                groupNameCell.textContent = group.name.split('--')[0];
+                row.appendChild(groupNameCell);
+
+                const removeCell = document.createElement('td');
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'حذف';
+                removeButton.classList.add('delete-button');
+
+                removeCell.appendChild(removeButton);
+                row.appendChild(removeCell);
+                groupTableBody.appendChild(row);
+                removeButton.addEventListener('click', async () => {
+                    const response = await fetch(`${apiBaseUrl}/remove-group`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ name: group.name }),
+                    });
+                    // remove group from table
+                    groupTableBody.removeChild(row);
+                    groups = await fetch(`${apiBaseUrl}/groups`).then(response => response.json());
+                });
+            });
+
+            // Add subjects to the subject list
+            subjects.forEach(subject => {
+                const option = document.createElement('option');
+                option.value = subject.id;
+                // option font 
+                option.style.fontFamily = 'Vazirmatn';
+                option.dataset.date = subject.date;
+                option.textContent = `(${subject.isForDouble ? 'دو نفر' : 'چهارنفر'}) ${subject.name} (${subject.date})`;
+                subjectSelect.appendChild(option);
+
+                // Add dates to the date list
+                const dateOption = document.createElement('option');
+                dateOption.value = subject.date;
+                // dateOption font
+                dateOption.style.fontFamily = 'Vazirmatn';
+                dateOption.dataset.subjectId = subject.id;
+                dateOption.textContent = subject.date;
+                dateSelect.appendChild(dateOption);
+            });
+
+            // Manage subjects
+            subjectSelect.addEventListener('change', () => {
+                const selectedOption = subjectSelect.selectedOptions[0];
+                if (selectedOption) {
+                    addRowToTable(subjectTableBody, selectedOption.textContent, true);
+                    removeFromDateList(selectedOption.dataset.date);
+                    subjectSelect.removeChild(selectedOption);
+                }
+            });
+
+            // Manage dates that have problems
+            dateSelect.addEventListener('change', () => {
+                if (dateTableBody.rows.length >= maxProblemDates) {
+                    //set timer for error message
+                    dateError.textContent = `شما فقط می‌توانید ${maxProblemDates} تاریخ مشکل‌دار انتخاب کنید.`;
+                    setTimeout(() => {
+                        dateError.textContent = '';
+                    }, 3000);
+                    return;
+                }
+                else {
+                    dateError.textContent = '';
+                }
+
+                const selectedOption = dateSelect.selectedOptions[0];
+                if (selectedOption) {
+                    addRowToTable(dateTableBody, selectedOption.value, false);
+                    removeFromSubjectList(selectedOption.dataset.subjectId);
+                    dateSelect.removeChild(selectedOption);
+                }
+            });
+
+            // Add a row to the table
+            function addRowToTable(tableBody, value, isSubject) {
+                const row = document.createElement('tr');
+
+                if (isSubject) {
+                    const priorityCell = document.createElement('td');
+                    priorityCell.textContent = tableBody.rows.length + 1;
+                    row.appendChild(priorityCell);
+                }
+
+                const valueCell = document.createElement('td');
+                valueCell.textContent = value;
+                row.appendChild(valueCell);
+
+                const removeCell = document.createElement('td');
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'حذف';
+                removeButton.classList.add('remove-button');
+                removeButton.addEventListener('click', () => {
+                    tableBody.removeChild(row);
+                    if (isSubject) {
+                        restoreToSubjectList(value);
+                    } else {
+                        restoreToDateList(value);
+                        if (!(dateTableBody.rows.length >= maxProblemDates)) {
+                            dateError.textContent = '';
+                        }
+                    }
+                    if (isSubject) reindexSubjectPriorities();
+                });
+                removeCell.appendChild(removeButton);
+                row.appendChild(removeCell);
+
+                tableBody.appendChild(row);
+            }
+
+            // Delete subject from list
+            function removeFromSubjectList(subjectId) {
+                const subjectOption = [...subjectSelect.options].find(option => option.value === subjectId);
+                // log options value
+                console.log("Subjects options value: ", [...subjectSelect.options].map(option => option));
+                console.log("Dates options value: ", [...dateSelect.options].map(option => option.value));
+
+                if (subjectOption) {
+                    subjectSelect.removeChild(subjectOption);
+                }
+            }
+
+            // Delete date from list
+            function removeFromDateList(date) {
+                const dateOption = [...dateSelect.options].find(option => option.value === date);
+                if (dateOption) {
+                    dateSelect.removeChild(dateOption);
+                }
+            }
+
+            // Restore date to list
+            function restoreToDateList(date, NeedRestorToSubjectList = true) {
+                const option = document.createElement('option');
+                option.value = date;
+                option.textContent = date;
+                option.dataset.subjectId = subjects.find(subject => subject.date === date).id;
+                dateSelect.appendChild(option);
+                if (NeedRestorToSubjectList) {
+                    const correspondingSubject = subjects.find(subject => subject.date === date);
+                    restoreToSubjectList(`(${correspondingSubject.isForDouble ? 'دو نفر' : 'چهارنفر'}) ${correspondingSubject.name} (${date})`, false);
+                }
+            }
+
+            // Restore subject to lists
+            function restoreToSubjectList(value, NeedRestorToDateList = true) {
+                const subject = subjects.find(subject => subject.name === value.split(' (')[0].split(') ')[1]);
+                console.log("Subject: ", value);
+                const option = document.createElement('option');
+                option.value = subject.id;
+                option.dataset.date = subject.date;
+                option.textContent = `(${subject.isForDouble ? 'دو نفر' : 'چهارنفر'}) ${subject.name} (${subject.date})`;
+                subjectSelect.appendChild(option);
+                if (NeedRestorToDateList) {
+                    const correspondingDate = subject.date;
+                    restoreToDateList(correspondingDate, false);
+                }
+            }
+
+            // Sort priorities after removing a subject
+            function reindexSubjectPriorities() {
+                const rows = subjectTableBody.querySelectorAll('tr');
+                rows.forEach((row, index) => {
+                    row.cells[0].textContent = index + 1;
+                });
+            }
+            // Submit form data
+            document.getElementById('groupForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const groupName = document.getElementById('groupName').value;
+                const priorities = Array.from(subjectTableBody.rows).map(row => row.cells[1].textContent);
+                const problemDates = Array.from(dateTableBody.rows).map(row => row.cells[0].textContent);
+
+                const groupData = {
+                    name: groupName,
+                    // instead of name add id to prioroties
+                    // {چهارنفر} موضوع 9 (2024-10-09)
+                    // priroty is like this
+                    // {چهارنفر} موضوع 9 (2024-10-09)
+
+                    priorities: priorities.map(priority => subjects.find(subject => subject.name === priority.split(' (')[0].split(') ')[1]).id),
+                    problemDates: problemDates,
+                    numberOfmembers: groupName.split('*')[1],
+                };
+                console.log("Group data: ", groupData);
+
+                const response = await fetch(`${apiBaseUrl}/add-group`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(groupData),
+                });
+                //reload the page
+                window.location.reload();
+
+                const result = await response.json();
+                alert(result.message);
+                // reset all data
+                subjectTableBody.innerHTML = '';
+                dateTableBody.innerHTML = '';
+                document.getElementById('groupName').value = '';
+                subjectSelect.innerHTML = '';
+                dateSelect.innerHTML = '';
+                // Add subjects to the subject list
+                subjects.forEach(subject => {
+                    const option = document.createElement('option');
+                    option.value = subject.id;
+                    // option font 
+                    option.style.fontFamily = 'Vazirmatn';
+                    option.dataset.date = subject.date;
+                    option.textContent = `(${subject.isForDouble ? 'دو نفر' : 'چهارنفر'}) ${subject.name} (${subject.date})`;
+                    subjectSelect.appendChild(option);
+
+                    // Add dates to the date list
+                    const dateOption = document.createElement('option');
+                    dateOption.value = subject.date;
+                    // dateOption font
+                    dateOption.style.fontFamily = 'Vazirmatn';
+                    dateOption.dataset.subjectId = subject.id;
+                    dateOption.textContent = subject.date;
+                    dateSelect.appendChild(dateOption);
+                });
+            });
+            // a listener for view results button
+            viewResultsButton.addEventListener('click', () => {
+                window.location.replace('http://localhost:3000/result.html');
+            });
+        });
+    </script>
+</body>
+
+</html>

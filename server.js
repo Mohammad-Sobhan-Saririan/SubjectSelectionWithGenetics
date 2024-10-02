@@ -141,12 +141,8 @@ function createChromosome() {
 
         // If no group prioritizes this subject, skip it
         if (groupsWithPriority.length === 0) {
-            // console.log(`Subject: ${subject.name} - No Group with Priority`);
-            // console.log(`iteration : ${i}`);
             continue;  // Skip to the next iteration
         }
-
-        // console.log(`Subject: ${subject.name} - Groups: ${groupsWithPriority.map(g => g.name)}`);
 
         // Handle non-double subjects
         if (!subject.isForDouble) {
@@ -162,7 +158,7 @@ function createChromosome() {
             // Remove the assigned group from the list of available groups
             notAssignedGroups = notAssignedGroups.filter(g => g.name !== group.name);
 
-            continue;  // Proceed to the next subject
+            continue;
         }
 
         // Handle double subjects
@@ -171,11 +167,8 @@ function createChromosome() {
 
             // If no double groups are available, skip this subject
             if (doubleGroups.length === 0) {
-                // console.log(`Subject: ${subject.name} - No Double Groups Available`);
                 continue;  // Skip to the next iteration
             }
-
-            // console.log(`Subject: ${subject.name} - Double Groups: ${doubleGroups.map(g => g.name)}`);
 
             // Randomly assign the subject to a double group
             let randomIndex = Math.floor(Math.random() * doubleGroups.length);
@@ -190,19 +183,12 @@ function createChromosome() {
             notAssignedGroups = notAssignedGroups.filter(g => g.name !== group.name);
         }
     }
-    //     availableSubjects = subjects.filter(s => s.isAvailable());
-    //     // for all the subjects that are not assigned to any group , if there is no group that has the priority of the subject , then break the loop
-    //     if (availableSubjects.length > 0 && notAssignedGroups.filter(g => g.priorities.some(p => availableSubjects.map(s => s.id).includes(p))).length === 0) {
-    //         break;
-    //     }
-    // }
+
     if (notAssignedGroups.length > 0) {
         //randomly assign the rest of the subjects to the groups
         availableSubjects = subjects.filter(s => s.isAvailable());
 
     }
-    // now all the subjects are assigned to the groups randomly , done
-    // console.log(`Return Chromosome: ${JSON.stringify(chromosome)} - Fitness: ${calculateFitness(chromosome)}`);
     return chromosome;
 }
 
@@ -388,9 +374,6 @@ function evolve(population) {
 function geneticAlgorithm() {
     let population = createInitialPopulation();
     for (let generation = 0; generation < GENERATIONS; generation++) {
-        // console.log(`Generation ${generation + 1}`);
-        // population.forEach(individual => console.log(`Chromosome: ${JSON.stringify(individual.chromosome)}, Fitness: ${individual.fitness}`));
-        // return;
         let bestChromosome = population.reduce((best, current) => current.fitness > best.fitness ? current : best, population[0]); // best chromosome in the population that has the highest fitness
         BestChromosome = BestChromosome.fitness > bestChromosome.fitness ? BestChromosome : bestChromosome;
         population = evolve(population);
@@ -406,12 +389,9 @@ function geneticAlgorithm() {
 }
 // API to get the lottery results
 app.get('/get-lottery-results', (req, res) => {
-    // log time
-    // console.log(`Start Time : ${new Date().toLocaleTimeString()}`);
     let StartTimer = new Date().toLocaleTimeString();
     let repeat = GeneticReapeat;
     let bestSolution = geneticAlgorithm();
-    // console.log(`Best Solution: ${JSON.stringify(bestSolution)}`);
     while (
         (bestSolution.chromosome.includes(null) ||
             subjects.filter(s => s.capacity === 1).some(s => bestSolution.chromosome.filter(c => c === s.id).length > 1) ||

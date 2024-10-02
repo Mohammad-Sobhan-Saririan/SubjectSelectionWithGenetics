@@ -383,8 +383,8 @@ function geneticAlgorithm() {
 
     // Find the best individual in the final population
     let bestIndividual = population.reduce((best, current) => current.fitness > best.fitness ? current : best, population[0]);
-    // console.log(`Best Solution: ${JSON.stringify(bestIndividual.chromosome)}, Fitness: ${bestIndividual.fitness}`);
-    // console.log(`Best Chromosome: ${JSON.stringify(BestChromosome.chromosome)}, Fitness: ${BestChromosome.fitness}\n`);
+    console.log(`Best Solution: ${JSON.stringify(bestIndividual.chromosome)}, Fitness: ${bestIndividual.fitness}`);
+    console.log(`Best Chromosome: ${JSON.stringify(BestChromosome.chromosome)}, Fitness: ${BestChromosome.fitness}\n`);
     return bestIndividual;
 }
 // API to get the lottery results
